@@ -1,0 +1,81 @@
+<div class="container">
+  <div>
+    <h1 style="text-align: center;">Sadguru's Amrit Tuliya - <em>Tea Shop</em></h1>
+  </div>
+  <button type="button" style="margin-top: 40px;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+    Add New Tea
+  </button>
+  <div class="row">
+    <div col-sm-10>
+<table class="table table-striped" style="margin-top: 20px;">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th style="text-align: center;">Actions</th>
+  </tr>
+  <tr *ngFor="let item of teamodel">
+    <td>{{item.Name}}</td>
+    <td>{{item.Description}}</td>
+    <td>{{item.Price}}</td>
+    <td><button class="btn btn-primary mr-3" (click)="EditTeaForm(item.Id)">View Details</button> 
+    <button class="btn btn-danger" (click)="DeleteCurrentTea(item.Id)">Remove</button></td>
+  </tr>
+</table>
+</div>
+  </div>
+
+  
+  
+  <!-- Modal for Add New Tea -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1">Add New Tea Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="TeaForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="TName" ><b>Tea Name</b></label>
+              <input type="text" formControlName="Name" placeholder="Enter Tea Name"  class="form-control">
+            </div>
+            <div *ngIf="TeaForm.controls['Name'].invalid && (TeaForm.controls['Name'].dirty || TeaForm.controls['Name'].touched)" class="alert alert-danger">
+              <div *ngIf="TeaForm.controls['Name'].errors.required">
+              Name is required.
+            </div>
+          </div>
+            <div class="form-group">
+            <label for="TDescription"><b>Tea Description</b></label>
+            <div><span style="font-size: 12px;">Description should be 100 characters only</span></div>
+            <textarea name="TDescription" maxlength="100"  aria-multiline="true" formControlName="Description" class="form-control"></textarea>
+            </div>
+            <div *ngIf="TeaForm.controls['Description'].invalid && (TeaForm.controls['Description'].dirty || TeaForm.controls['Description'].touched)"  class="alert alert-danger">
+              <div *ngIf="TeaForm.controls['Description'].errors.required">
+                Description is required.
+            </div>
+            <div *ngIf="TeaForm.controls['Description'].errors.maxlength">
+              Description field shoud not contain more 100 characters.
+          </div>
+          </div>
+            <div class="form-group">
+              <label for="TPrice"><b>Tea Price(Rs.)</b></label>
+              <input type="number" name="TPrice" formControlName="Price" class="form-control">
+            </div>
+            <div *ngIf="TeaForm.controls['Price'].invalid && (TeaForm.controls['Price'].dirty || TeaForm.controls['Price'].touched)" class="alert alert-danger">
+              <div *ngIf="TeaForm.controls['Price'].errors.required">
+                Price is required.
+            </div>
+          </div>
+            <div class="modal-footer">
+            <button [disabled]='!TeaForm.valid' type="submit" class="btn btn-primary">Save Details</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"  (click)="onClose()">Close</button>
+            </div>  
+        </form>          
+      </div>
+    </div>
+  </div>
+</div>

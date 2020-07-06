@@ -1,0 +1,29 @@
+<div class="container">
+  <div>
+    <h1 style="text-align: center;">Sadguru's Amrit Tuliya - <em>Tea Shop</em></h1>
+  </div>
+  <div><h2>Tea Description </h2></div> 
+<div class="row" style="margin-top: 50px;">
+ <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+<div *ngFor="let item of teamodel">
+  <table class=" table table-bordered">
+    <tr>
+      <td> <b>Tea Name -</b></td>
+      <td>{{item.Name}}</td>
+    </tr>
+    <tr>
+      <td><b>Tea Description - </b></td>
+      <td>{{item.Description}}</td>
+    </tr>
+    <tr>
+      <td><b>Tea Price -</b> </td>
+      <td>{{item.Price}}</td>
+    </tr>
+  </table>
+  <button type="button" class="btn btn-primary" style="float: right;" (click)="back()">Back To Mainpage</button>
+</div>
+<div class="col-sm-2"></div>
+</div>
+</div>
+</div>
